@@ -4,7 +4,8 @@ import AppLayout  from "@/layouts/AppLayout.vue";
   import Devices from "@/views/Devices.vue";
   import Scripts from "@/views/Scripts.vue"
   import Journal from "@/views/Journal.vue";
-
+  import Device from "@/views/Device.vue";
+  
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -14,7 +15,7 @@ const router = createRouter({
       children: [
         {
           path: 'devices',
-          component: Devices,
+          component: Device,
         },
         {
           path: 'scripts',

@@ -1,8 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue'
-import DeviceList from './DeviceList.vue'
-import DeviceEditor from './DeviceEditor.vue'
-import { createDevice, deviceTemplates, initialDevices } from './devicesMock'
+import DeviceList from '@/components/DeviceList.vue'
+import DeviceEditor from '@/components/DeviceEditor.vue'
+import { createDevice, deviceTemplates, initialDevices } from './DevicesMock'
 
 defineOptions({ name: 'Devices' })
 
@@ -40,78 +40,61 @@ function onDelete(id) {
 			@create="onCreate"
 		/>
 		
-		<DeviceEditor
-			v-if="selected"
-			:key="selected.id"
-			:device="selected"
-			@save="onSave"
-			@delete="onDelete"
-		/>
-		<p v-else class="empty">Выберите устройство слева или создайте новое.</p>
+		<DeviceEditor v-if="selected" :key="selected.id" :device="selected" @save="onSave" @delete="onDelete" />
+		<p v-else>Выберите устройство или создайте новое.</p>
 	</div>
 </template>
 
-<!-- Общие переменные и базовые элементы — без scoped, чтобы работали во всех дочерних компонентах -->
 <style>
 .devices {
-	--bg: #12141a;
-	--panel: #1a1d25;
-	--field: #1f232d;
-	--border: #2b2f3b;
-	--text: #d8dae0;
-	--muted: #8a8f9c;
-	--accent: #8b7cf6;
-	--accent-bg: #2a2650;
-	--accent-border: #5c52b8;
-	--green: #3ecf8e;
-	--danger: #ef6a6a;
+	--border: 1px solid #444;
+	--radius: 8px;
 	
-	display: grid;
-	grid-template-columns: 270px 1fr;
-	gap: 14px;
-	align-items: start;
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
 	min-height: 100vh;
-	padding: 16px;
-	box-sizing: border-box;
-	background: var(--bg);
-	color: var(--text);
-	font: 12px/1.4 ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+	padding: 12px;
+	//background: #000;
+	color: #fff;
+	font-family: var(--font-main);
+	font-size: 13px;
 }
-.devices *, .devices *::before, .devices *::after { box-sizing: border-box; }
-
-.devices .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; }
-
-.devices .field {
-	width: 100%;
-	height: 28px;
-	padding: 0 8px;
-	border: 1px solid var(--border);
-	border-radius: 6px;
-	background: var(--field);
-	color: var(--text);
-	font: inherit;
+.devices * {
+	font-family: var(--font-main);
 }
-.devices .field:focus { outline: none; border-color: var(--accent); }
-
-.devices .btn {
-	height: 28px;
-	padding: 0 10px;
-	border: 1px solid var(--border);
-	border-radius: 6px;
-	background: transparent;
-	color: var(--text);
-	font: inherit;
-	cursor: pointer;
+.devices .panel {
+	padding: 12px;
+	border: var(--border);
+	border-radius: var(--radius);
 }
-.devices .btn:hover { border-color: var(--muted); }
-.devices .btn--small { height: 22px; padding: 0 8px; margin-top: 6px; font-size: 10.5px; }
-.devices .btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.devices .btn--primary:hover { filter: brightness(1.1); border-color: var(--accent); }
-.devices .btn--danger { color: var(--danger); border-color: rgba(239, 106, 106, 0.4); }
-
-.devices .empty { padding: 24px; color: var(--muted); }
-
-@media (max-width: 800px) {
-	.devices { grid-template-columns: 1fr; }
+.devices .panel--list {
+	width: 270px;
+	flex: none;
+}
+.devices .panel--editor {
+	flex: 1;
+	min-width: 0;
+}
+.devices input,
+.devices select,
+.devices button {
+	padding: 4px 8px;
+	//background: #000;
+	//color: #fff;
+	border: var(--border);
+	border-radius: var(--radius);
+	font-size: inherit;
+}
+.devices button:disabled {
+	background: #333;
+}
+.devices table {
+	border-collapse: collapse;
+}
+.devices th,
+.devices td {
+	text-align: left;
+	padding: 2px 4px;
 }
 </style>

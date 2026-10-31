@@ -113,7 +113,7 @@ const router = useRouter();
 			<img
 				class="left-panel-title-img"
 				alt="ERR"/>
-			<span> Smart Ocean </span>
+			<span> Дом </span>
 		</div>
 		
 		<div class="left-menu-bar">
