@@ -1,0 +1,54 @@
+.bold {
+    font-weight: bold;
+}
+
+.gray {
+    color: gray;
+}
+
+.green {
+    background-color: #4dc24d;
+}
+
+.font {
+    font-family: var(--font-main);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(270px, 1fr)
+    );
+
+    grid-template-rows: repeat(
+        auto-fill,
+        minmax(150px, 1fr)
+    );
+    /*gap: 5px;*/
+
+    height: 100%;
+
+    align-items: start;
+    justify-items: center;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.input-label {
+    font-family: var(--font-main);
+    background-color: transparent;
+    border-color: transparent;
+    color: black;
+}
+
+.input-label:focus {
+    border: none;
+    outline: none;
+    color: black;
+}
+
+.input-label::placeholder {
+    color: black;
+}
