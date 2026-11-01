@@ -1,55 +1,28 @@
 
-const API_HOST = 'http://localhost:80/api/';
+const API_HOST = '/api';
 
 export const ApiService =
 	{
-		async run(
-			endpoint,
-			body = { 'mok': 0 }
-		) {
-			if (!endpoint) {
-				console.error('No endpoint');
-				return null;
+		async request(method, endpoint, body) {
+			let init = { method, headers: {} };
+
+			if (body !== undefined) {
+				init.headers['Content-Type'] = 'application/json';
+				init.body = JSON.stringify(body);
 			}
-			
-			console.log('Endpoint: ', endpoint);
-			
-			let headers_data = {
-				'Content-Type': 'application/json',
-			};
-			
-			if (sessionStorage.hasOwnProperty('accessToken')) {
-				headers_data.Token = sessionStorage.getItem('accessToken');
-			}
-			
-			let init = {
-				method: 'POST',
-				headers: headers_data
-			};
-			
-			init.body = JSON.stringify(body);
+
 			const response = await fetch(API_HOST + endpoint, init);
-			
+			const data = await response.json().catch(() => null);
+
 			if (!response.ok) {
-				console.log(await response.text());
-				return {};
+				const detail = data?.detail;
+				throw new Error(Array.isArray(detail) ? detail.join('\n') : detail || response.statusText);
 			}
-			
-			try {
-				console.log('ApiService -> convert');
-				const responseJson = await response.json();
-				console.log('ApiService -> convert end');
-				if (responseJson.status !== 1) {
-					console.log(responseJson.data);
-					return {};
-				}
-				console.log(responseJson);
-				return responseJson.data;
-			}
-			catch (error) {
-				console.log("Runtime error:");
-				console.error(error);
-				return {};
-			}
-		}
+			return data;
+		},
+
+		get: (endpoint) => ApiService.request('GET', endpoint),
+		post: (endpoint, body = {}) => ApiService.request('POST', endpoint, body),
+		put: (endpoint, body) => ApiService.request('PUT', endpoint, body),
+		del: (endpoint) => ApiService.request('DELETE', endpoint),
 	}

@@ -61,21 +61,27 @@ const newSetting = () => ({ name: '', title: '', unit: '', value: 0, min: 0, max
 	<div class="panel panel--editor">
 		<h2>Устройство: {{ device.name }}</h2>
 		
-		<p>
+		<div class="fields">
 			<label>Название <input v-model="draft.name" type="text" /></label>
 			<label>Помещение <input v-model="draft.room" type="text" /></label>
-			<label>ext_guid <input v-model="draft.guid" type="text" /></label>
-		</p>
+			<label>Слот в Ujin <input v-model="draft.guid" type="text" placeholder="не привязано" /></label>
+			<label>Окно
+				<select v-model="draft.section">
+					<option value="service">служебное</option>
+					<option value="vet">ветеринары</option>
+				</select>
+			</label>
+		</div>
 		
-		<SectionTable v-model="draft.params" title="Параметры" :columns="paramColumns" :create-row="newParam" />
-		<SectionTable v-model="draft.events" title="События" :columns="eventColumns" :create-row="newEvent" />
-		<SectionTable v-model="draft.commands" title="Команды" :columns="commandColumns()" :create-row="newCommand" />
-		<SectionTable v-model="draft.settings" title="Настройки" :columns="settingColumns" :create-row="newSetting" />
+		<SectionTable v-model="draft.params" title="Сигналы — что устройство показывает" :columns="paramColumns" :create-row="newParam" />
+		<SectionTable v-model="draft.events" title="События — о чём сообщает" :columns="eventColumns" :create-row="newEvent" />
+		<SectionTable v-model="draft.commands" title="Команды — чем можно управлять" :columns="commandColumns()" :create-row="newCommand" />
+		<SectionTable v-model="draft.settings" title="Настройки — пороги и нормы" :columns="settingColumns" :create-row="newSetting" />
 		
-		<p>
-			<button type="button" @click="save">Сохранить</button>
-			<button type="button" @click="cancel">Отмена</button>
-			<button type="button" @click="emit('delete', device.id)">Удалить устройство</button>
-		</p>
+		<div class="row" style="margin-top: 24px">
+			<button type="button" class="primary" @click="save">Сохранить</button>
+			<button type="button" @click="cancel">Отменить изменения</button>
+			<button type="button" class="danger" style="margin-left: auto" @click="emit('delete', device.id)">Удалить устройство</button>
+		</div>
 	</div>
 </template>

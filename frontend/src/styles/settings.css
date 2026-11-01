@@ -3,7 +3,7 @@
 }
 
 .gray {
-    color: gray;
+    color: var(--muted);
 }
 
 .green {
@@ -40,15 +40,15 @@
     font-family: var(--font-main);
     background-color: transparent;
     border-color: transparent;
-    color: black;
+    color: var(--text);
 }
 
 .input-label:focus {
     border: none;
     outline: none;
-    color: black;
+    color: var(--text);
 }
 
 .input-label::placeholder {
-    color: black;
+    color: var(--text);
 }

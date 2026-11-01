@@ -1,4 +1,9 @@
 secret/*
 doc/*
-emulators/__pycache__/*
-emulators/devices/__pycache__/*
+.env
+backend/data.json
+backend/.venv/
+__pycache__/
+*.pyc
+frontend/node_modules/
+frontend/dist/

@@ -1,0 +1,381 @@
+[
+  {
+    "id": "leak",
+    "title": "Датчик протечки",
+    "room": "Технический зал",
+    "type": "leak",
+    "section": "service",
+    "ujin_ext": "ry_leak_01",
+    "signals": [
+      {
+        "name": "leak",
+        "title": "Протечка",
+        "type": "list",
+        "values": {
+          "0": "нет",
+          "1": "есть"
+        },
+        "alarm": "1"
+      },
+      {
+        "name": "water",
+        "title": "Подача воды",
+        "type": "list",
+        "values": {
+          "0": "перекрыта",
+          "1": "открыта"
+        },
+        "alarm": "0"
+      }
+    ],
+    "events": [
+      {
+        "name": "leak_detected",
+        "title": "Обнаружена протечка",
+        "when": {
+          "leak": 1
+        }
+      },
+      {
+        "name": "leak_cleared",
+        "title": "Протечка устранена",
+        "when": {
+          "leak": 0
+        }
+      }
+    ],
+    "commands": [
+      {
+        "name": "water_off",
+        "title": "Отключить воду",
+        "set": {
+          "water": 0
+        }
+      },
+      {
+        "name": "water_on",
+        "title": "Включить воду",
+        "set": {
+          "water": 1
+        }
+      }
+    ],
+    "settings": [],
+    "state": {
+      "leak": 0,
+      "water": 1
+    }
+  },
+  {
+    "id": "light",
+    "title": "Датчик света",
+    "room": "Залы",
+    "type": "light",
+    "section": "service",
+    "ujin_ext": "ry_light_01",
+    "signals": [
+      {
+        "name": "level",
+        "title": "Освещённость",
+        "type": "number",
+        "unit": "%"
+      }
+    ],
+    "events": [],
+    "commands": [
+      {
+        "name": "set_level",
+        "title": "Задать освещённость",
+        "set": {
+          "level": "$value"
+        }
+      }
+    ],
+    "settings": [],
+    "state": {
+      "level": 40
+    }
+  },
+  {
+    "id": "ventilation",
+    "title": "Датчик вентиляции",
+    "room": "Технический зал",
+    "type": "ventilation",
+    "section": "service",
+    "ujin_ext": "ry_barrier_01",
+    "signals": [
+      {
+        "name": "humidity",
+        "title": "Влажность",
+        "type": "number",
+        "unit": "%"
+      },
+      {
+        "name": "fan",
+        "title": "Вентиляция",
+        "type": "list",
+        "values": {
+          "0": "выключена",
+          "1": "включена"
+        }
+      }
+    ],
+    "events": [],
+    "commands": [
+      {
+        "name": "fan_on",
+        "title": "Включить вентиляцию",
+        "set": {
+          "fan": 1
+        }
+      },
+      {
+        "name": "fan_off",
+        "title": "Выключить вентиляцию",
+        "set": {
+          "fan": 0
+        }
+      }
+    ],
+    "settings": [
+      {
+        "name": "humidity_max",
+        "title": "Допустимая влажность",
+        "unit": "%",
+        "value": 70,
+        "min": 0,
+        "max": 100
+      }
+    ],
+    "state": {
+      "humidity": 60,
+      "fan": 0
+    }
+  },
+  {
+    "id": "temperature",
+    "title": "Датчик температуры",
+    "room": "Зал аквариумов",
+    "type": "climate",
+    "section": "vet",
+    "ujin_ext": "ry_thermostat_01",
+    "signals": [
+      {
+        "name": "temp",
+        "title": "Температура",
+        "type": "number",
+        "unit": "°C"
+      },
+      {
+        "name": "mode",
+        "title": "Климат",
+        "type": "list",
+        "values": {
+          "0": "выключен",
+          "1": "охлаждение",
+          "2": "подогрев"
+        }
+      }
+    ],
+    "events": [],
+    "commands": [
+      {
+        "name": "cool",
+        "title": "Включить охлаждение",
+        "set": {
+          "mode": 1
+        }
+      },
+      {
+        "name": "heat",
+        "title": "Включить подогрев",
+        "set": {
+          "mode": 2
+        }
+      },
+      {
+        "name": "off",
+        "title": "Выключить климат",
+        "set": {
+          "mode": 0
+        }
+      }
+    ],
+    "settings": [
+      {
+        "name": "norm_min",
+        "title": "Норма от",
+        "unit": "°C",
+        "value": 22,
+        "min": 0,
+        "max": 40
+      },
+      {
+        "name": "norm_max",
+        "title": "Норма до",
+        "unit": "°C",
+        "value": 26,
+        "min": 0,
+        "max": 40
+      }
+    ],
+    "state": {
+      "temp": 24,
+      "mode": 0
+    }
+  },
+  {
+    "id": "turbidity",
+    "title": "Датчик загрязнённости воды",
+    "room": "Зал аквариумов",
+    "type": "turbidity",
+    "section": "vet",
+    "ujin_ext": "ry_counter_01",
+    "signals": [
+      {
+        "name": "turbidity",
+        "title": "Мутность",
+        "type": "number",
+        "unit": "NTU"
+      }
+    ],
+    "events": [],
+    "commands": [],
+    "settings": [
+      {
+        "name": "norm_max",
+        "title": "Норма до",
+        "unit": "NTU",
+        "value": 5,
+        "min": 0,
+        "max": 50
+      }
+    ],
+    "state": {
+      "turbidity": 2
+    }
+  },
+  {
+    "id": "ph",
+    "title": "Датчик кислотности воды",
+    "room": "Зал аквариумов",
+    "type": "ph",
+    "section": "vet",
+    "signals": [
+      {
+        "name": "ph",
+        "title": "pH",
+        "type": "number"
+      }
+    ],
+    "events": [],
+    "commands": [],
+    "settings": [
+      {
+        "name": "norm_min",
+        "title": "Норма от",
+        "value": 8.0,
+        "min": 0,
+        "max": 14
+      },
+      {
+        "name": "norm_max",
+        "title": "Норма до",
+        "value": 8.5,
+        "min": 0,
+        "max": 14
+      }
+    ],
+    "state": {
+      "ph": 8.2
+    },
+    "ujin_ext": "ry_counter_01"
+  },
+  {
+    "id": "filter",
+    "title": "Фильтр",
+    "room": "Зал аквариумов",
+    "type": "filter",
+    "section": "vet",
+    "signals": [
+      {
+        "name": "mode",
+        "title": "Фильтрация",
+        "type": "list",
+        "values": {
+          "0": "умеренная",
+          "1": "усиленная"
+        }
+      }
+    ],
+    "events": [],
+    "commands": [
+      {
+        "name": "boost",
+        "title": "Усилить фильтрацию",
+        "set": {
+          "mode": 1
+        }
+      },
+      {
+        "name": "normal",
+        "title": "Умеренная фильтрация",
+        "set": {
+          "mode": 0
+        }
+      }
+    ],
+    "settings": [],
+    "state": {
+      "mode": 0
+    },
+    "ujin_ext": "ry_barrier_01"
+  },
+  {
+    "id": "clock",
+    "title": "Время суток",
+    "room": "",
+    "type": "clock",
+    "section": "service",
+    "signals": [
+      {
+        "name": "period",
+        "title": "Время суток",
+        "type": "list",
+        "values": {
+          "0": "день",
+          "1": "вечер",
+          "2": "ночь"
+        }
+      }
+    ],
+    "events": [
+      {
+        "name": "day",
+        "title": "Наступил день",
+        "when": {
+          "period": 0
+        }
+      },
+      {
+        "name": "evening",
+        "title": "Наступил вечер",
+        "when": {
+          "period": 1
+        }
+      },
+      {
+        "name": "night",
+        "title": "Наступила ночь",
+        "when": {
+          "period": 2
+        }
+      }
+    ],
+    "commands": [],
+    "settings": [],
+    "state": {
+      "period": 0
+    }
+  }
+]

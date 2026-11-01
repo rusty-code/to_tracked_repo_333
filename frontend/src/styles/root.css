@@ -1,11 +1,19 @@
 :root {
-    --font-main: "IBM Plex Sans", sans-serif;
-    --color-main: #ffffff;
-    --hover-color: rgb(224 224 224);
-    --shadow-color: rgb(164 164 164);
-    --box-shadow: 0 5px 10px var(--shadow-color);
+    color-scheme: dark;
+    --font-main: "IBM Plex Sans", "Segoe UI", sans-serif;
+    --bg: #181818;
+    --text: rgba(235, 235, 235, 0.86);
+    --color-main: #222222;
+    --color-input: #1c1c1c;
+    --hover-color: #2c2c2c;
+    --accent: #00bd7e;
+    --accent-hover: #00a36d;
+    --accent-light: rgba(0, 189, 126, 0.16);
+    --danger: #ff6b6b;
+    --ok: #5cc98a;
+    --muted: rgba(235, 235, 235, 0.55);
 
     --height-app: 100%;
-    --border-radius: 10px;
-    --border-style: 1px solid rgb(194 194 194 / 0.5);
+    --border-radius: 8px;
+    --border-style: 1px solid rgba(84, 84, 84, 0.65);
 }

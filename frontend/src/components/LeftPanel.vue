@@ -2,127 +2,90 @@
 
 .left-panel {
 	user-select: none;
-	
-	grid-column: 1;
-	position: relative;
-	
 	display: flex;
 	flex-direction: column;
-	
-	align-self: center;
-	justify-self: center;
-	
-	align-items: center;
-	
-	height: var(--height-app);
-	width: 200px;
-	
+	gap: 24px;
+	height: 100vh;
+	padding: 24px 16px;
+	background: var(--color-main);
 	border-right: var(--border-style);
-	
-	margin-left: 10px;
-	
-	gap: 20px;
+	font-family: var(--font-main);
 }
 
 .left-panel-title {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	
-	width: inherit;
-	max-width: 200px;
-	
-	font-size: 1.5rem;
-	
-	text-align: center;
-	padding-top: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 0 12px;
 }
 
-.left-panel-title-img {
-	width: 30%;
+.left-panel-title span {
+	display: block;
+	font-size: 12px;
+	font-weight: normal;
+	color: var(--muted);
+	margin-top: 2px;
 }
 
-.left-menu-bar {
-	display: flex;
-	flex-direction: column;
-	
-	justify-content: space-between;
-	align-self: center;
-	align-items: center;
-	
-	width: 100%;
-	height: 85%;
+.group-title {
+	font-size: 12px;
+	color: var(--muted);
+	padding: 0 12px 6px;
 }
 
 .page-buttons {
 	display: flex;
 	flex-direction: column;
-	
-	align-items: center;
-	
-	gap: 10px;
+	gap: 2px;
 }
 
 </style>
 
 <script setup>
 
-import {useRouter} from 'vue-router';
-
+import {useRoute, useRouter} from 'vue-router';
 
 import MenuButton from '@/components/MenuButton.vue';
 
-// import projectWikiLogo from '@/assets/logo/open-book.svg';
-// import homePageLogo from '@/assets/logo/home.svg';
-// import projectsPageLogo from '@/assets/logo/folder.svg';
-// import teamPageLogo from '@/assets/logo/team.svg';
-// import logoutLogo from '@/assets/logo/start.svg'
-
-
-const items = [
+const groups = [
 	{
-		id: 'main-page',
-		title: 'Устройства',
-		// icon: homePageLogo,
-		route: '/devices'
+		title: 'Рабочие окна',
+		items: [
+			{ id: 'service', title: 'Служебное', route: '/service' },
+			{ id: 'vet', title: 'Ветеринары', route: '/vet' },
+		],
 	},
 	{
-		id: 'projects',
-		title: 'Сценарии',
-		// icon: projectsPageLogo,
-		route: '/scripts'
+		title: 'Настройка системы',
+		items: [
+			{ id: 'main-page', title: 'Устройства', route: '/devices' },
+			{ id: 'projects', title: 'Сценарии', route: '/scripts' },
+			{ id: 'emulators', title: 'Эмуляторы', route: '/emulators' },
+			{ id: 'team', title: 'Журнал', route: '/journal' },
+		],
 	},
-	{
-		id: 'team',
-		title: 'Журнал',
-		// icon: teamPageLogo,
-		route: '/journal'
-	}
 ]
 
 const router = useRouter();
+const route = useRoute();
 
 </script>
 
 <template>
 	<aside class="left-panel">
-		<div
-			class="left-panel-title bold"
-		>
-			<img
-				class="left-panel-title-img"
-				alt="ERR"/>
-			<span> Дом </span>
+		<div class="left-panel-title">
+			Океанариум
+			<span>система сценариев</span>
 		</div>
-		
-		<div class="left-menu-bar">
+
+		<div v-for="g in groups" :key="g.title">
+			<div class="group-title">{{ g.title }}</div>
 			<div class="page-buttons">
 				<MenuButton
-					v-for="item in items"
+					v-for="item in g.items"
 					:key="item.id"
 					:id="item.id"
 					:title="item.title"
+					:active="route.path === item.route"
 					@click="router.push(item.route)"
 				/>
 			</div>

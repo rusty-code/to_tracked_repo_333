@@ -1,48 +1,25 @@
 <style scoped>
 
 .button {
-	display: grid;
-	grid-template-columns: 1fr 1fr 2fr;
-	align-items: center;
-	text-align: center;
-	gap: 20px;
-	padding-left: 20px;
-	
-	width: 90%;
-	max-width: 90%;
-	height: 45px;
-
-	transition: background-color 0.15s;
-	
-	
-	border: var(--border-style);
-	border-radius: var(--border-radius);
-	
+	display: block;
+	width: 100%;
+	padding: 9px 12px;
+	border-radius: 6px;
+	font-family: var(--font-main);
+	font-size: 14px;
+	color: var(--text);
 	cursor: pointer;
+	transition: background-color 0.15s;
 }
 
 .button:hover {
 	background-color: var(--hover-color);
-	cursor: pointer;
-}
-
-.button .logo {
-	grid-column: 1;
-	margin-left: auto;
-	width: 30px;
-	background-color: rgba(255, 255, 255, 0);
-}
-
-.button .text {
-	grid-column: 2;
-	font-size: 100%;
-	margin-left: auto;
-	background-color: rgba(255, 255, 255, 0);
-	font-family: var(--font-main);
 }
 
 .enabled {
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: var(--accent-light);
+	color: var(--accent);
+	font-weight: bold;
 }
 
 </style>
@@ -58,9 +35,11 @@ const props = defineProps({
 		type: String,
 		required: true
 	},
+	active: {
+		type: Boolean,
+		default: false
+	},
 });
-
-
 
 </script>
 
@@ -68,13 +47,8 @@ const props = defineProps({
 	<div
 		:id="props.id"
 		class="button"
+		:class="{ enabled: props.active }"
 	>
-		<img
-			:src="props.icon"
-			class="logo"
-			alt="ERR"/>
-		<span
-			class="text"
-		> {{props.title}} </span>
+		{{ props.title }}
 	</div>
 </template>

@@ -1,30 +1,20 @@
 <style scoped>
 
 .main-app {
-	display: flex;
-	flex-direction: row;
-	height: 100%;
+	display: grid;
+	grid-template-columns: 220px 1fr;
+	height: 100vh;
 	width: 100%;
-	
-	max-height: 100vh;
-	max-width: 100vw;
-	gap: 15px;
-	align-items: center;
 }
 
 .work-area {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	height: var(--height-app);
-	margin-right: 20px;
+	height: 100vh;
+	overflow-y: auto;
 }
 
 .page-view {
-	width: 100%;
-	height: 100%;
-	margin-top: 20px;
-	//background-color: var(--color-main);
+	max-width: 1280px;
+	padding: 24px 32px 40px;
 }
 
 </style>

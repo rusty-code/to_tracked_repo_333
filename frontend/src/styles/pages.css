@@ -1,0 +1,137 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: var(--font-main);
+}
+
+.page-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.page h1 {
+    font-size: 22px;
+}
+
+.page h3 {
+    font-size: 15px;
+    margin-top: 16px;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.page .panel {
+    background: var(--color-main);
+    padding: 16px;
+    border: var(--border-style);
+    border-radius: var(--border-radius);
+}
+
+.page .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.page .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.page .row + .row {
+    margin-top: 8px;
+}
+
+.page input,
+.page select,
+.page button {
+    height: 32px;
+    padding: 0 10px;
+    border: var(--border-style);
+    border-radius: 6px;
+    background: var(--color-input);
+    color: inherit;
+    font: inherit;
+}
+
+.page input[type="checkbox"] {
+    height: auto;
+    width: 16px;
+}
+
+.page button {
+    cursor: pointer;
+    background: var(--hover-color);
+}
+
+.page button:hover {
+    background: #353535;
+}
+
+.page button:disabled {
+    cursor: default;
+    color: var(--muted);
+    background: var(--color-main);
+}
+
+.page button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0b1f17;
+    font-weight: bold;
+}
+
+.page button.primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.page button.danger {
+    color: var(--danger);
+}
+
+.page table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.page th {
+    text-align: left;
+    font-weight: normal;
+    color: var(--muted);
+    padding: 8px;
+    border-bottom: var(--border-style);
+}
+
+.page td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: var(--border-style);
+    vertical-align: middle;
+}
+
+.page tr:last-child td {
+    border-bottom: none;
+}
+
+.bad {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+.ok {
+    color: var(--ok);
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "id": "leak",
+    "title": "Протечка",
+    "enabled": true,
+    "when": {"type": "event", "device": "leak", "event": "leak_detected"},
+    "if": [],
+    "then": [
+      {"type": "command", "device": "leak", "command": "water_off"},
+      {"type": "notify", "to": "service", "text": "Протечка в техническом зале, вода отключена"},
+      {"type": "command", "device": "ventilation", "command": "fan_on"}
+    ]
+  },
+  {
+    "id": "dirty_water",
+    "title": "Вода загрязнена",
+    "enabled": true,
+    "when": {"type": "signal", "device": "turbidity", "signal": "turbidity", "op": ">", "value": 5},
+    "if": [],
+    "then": [
+      {"type": "command", "device": "filter", "command": "boost"},
+      {"type": "notify", "to": "vet", "text": "Мутность воды выше нормы, фильтрация усилена"}
+    ]
+  },
+  {
+    "id": "ph_low",
+    "title": "Кислотность ниже нормы",
+    "enabled": true,
+    "when": {"type": "signal", "device": "ph", "signal": "ph", "op": "<", "value": 8.0},
+    "if": [],
+    "then": [
+      {"type": "command", "device": "filter", "command": "boost"},
+      {"type": "notify", "to": "vet", "text": "pH воды ниже нормы, фильтрация усилена"}
+    ]
+  },
+  {
+    "id": "ph_high",
+    "title": "Кислотность выше нормы",
+    "enabled": true,
+    "when": {"type": "signal", "device": "ph", "signal": "ph", "op": ">", "value": 8.5},
+    "if": [],
+    "then": [
+      {"type": "command", "device": "filter", "command": "boost"},
+      {"type": "notify", "to": "vet", "text": "pH воды выше нормы, фильтрация усилена"}
+    ]
+  },
+  {
+    "id": "too_hot",
+    "title": "Температура выше нормы",
+    "enabled": true,
+    "when": {"type": "signal", "device": "temperature", "signal": "temp", "op": ">", "value": 26},
+    "if": [],
+    "then": [
+      {"type": "command", "device": "temperature", "command": "cool"},
+      {"type": "notify", "to": "vet", "text": "Температура выше нормы, включено охлаждение"}
+    ]
+  },
+  {
+    "id": "too_cold",
+    "title": "Температура ниже нормы",
+    "enabled": true,
+    "when": {"type": "signal", "device": "temperature", "signal": "temp", "op": "<", "value": 22},
+    "if": [],
+    "then": [
+      {"type": "command", "device": "temperature", "command": "heat"},
+      {"type": "notify", "to": "vet", "text": "Температура ниже нормы, включён подогрев"}
+    ]
+  },
+  {
+    "id": "evening",
+    "title": "Вечерний свет",
+    "enabled": true,
+    "when": {"type": "event", "device": "clock", "event": "evening"},
+    "if": [],
+    "then": [{"type": "command", "device": "light", "command": "set_level", "value": 75}]
+  },
+  {
+    "id": "night",
+    "title": "Ночной свет",
+    "enabled": true,
+    "when": {"type": "event", "device": "clock", "event": "night"},
+    "if": [],
+    "then": [{"type": "command", "device": "light", "command": "set_level", "value": 10}]
+  },
+  {
+    "id": "day",
+    "title": "Дневной свет",
+    "enabled": true,
+    "when": {"type": "event", "device": "clock", "event": "day"},
+    "if": [],
+    "then": [{"type": "command", "device": "light", "command": "set_level", "value": 40}]
+  }
+]

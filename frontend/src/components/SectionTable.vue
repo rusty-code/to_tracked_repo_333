@@ -14,7 +14,7 @@ const remove = (i) => rows.value.splice(i, 1)
 <template>
 	<div>
 		<h3>{{ title }}</h3>
-		<table>
+		<table v-if="rows.length">
 			<thead>
 			<tr>
 				<th v-for="col in columns" :key="col.key">{{ col.label }}</th>
@@ -31,10 +31,11 @@ const remove = (i) => rows.value.splice(i, 1)
 					<input v-else-if="col.kind === 'number'" v-model.number="row[col.key]" type="number" />
 					<input v-else v-model="row[col.key]" type="text" />
 				</td>
-				<td><button type="button" @click="remove(i)">x</button></td>
+				<td style="width: 1%"><button type="button" class="danger" @click="remove(i)">Удалить</button></td>
 			</tr>
 			</tbody>
 		</table>
-		<button type="button" @click="add">+ добавить</button>
+		<p v-if="!rows.length" class="muted">Пока пусто</p>
+		<button type="button" style="margin-top: 8px" @click="add">Добавить строку</button>
 	</div>
 </template>
